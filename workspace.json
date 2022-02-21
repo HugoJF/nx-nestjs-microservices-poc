@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
-    "microservices-poc-nx": "apps/microservices-poc-nx"
+    "history": "apps/history",
+    "math": "apps/math"
   }
 }

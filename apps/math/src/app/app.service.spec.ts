@@ -14,10 +14,8 @@ describe('AppService', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to microservices-poc-nx!"', () => {
-      expect(service.getData()).toEqual({
-        message: 'Welcome to microservices-poc-nx!',
-      });
+    it('should return "Welcome to math!"', () => {
+      expect(service.getData()).toEqual({ message: 'Welcome to math!' });
     });
   });
 });

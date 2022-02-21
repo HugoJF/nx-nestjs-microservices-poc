@@ -1,0 +1,39 @@
+service: nx-nestjs-microservices-poc
+frameworkVersion: '2 || 3'
+
+plugins:
+  - serverless-domain-manager
+  - serverless-offline
+
+provider:
+  name: aws
+  stage: ${opt:stage, "dev"}
+  runtime: nodejs14.x
+  region: sa-east-1
+  lambdaHashingVersion: '20201221'
+
+custom:
+  customDomain:
+    domainName: nx-nestjs-microservices-poc.sa-east-1.aws.hugo.dev.br
+    basePath: ''
+    stage: ${self:provider.stage}
+
+functions:
+  history:
+    handler: dist/apps/history/main.handler
+    events:
+      - http:
+          path: /history/{any+}
+          method: ANY
+      - http:
+          path: /history
+          method: ANY
+  math:
+    handler: dist/apps/math/main.handler
+    events:
+      - http:
+          path: /math/{any+}
+          method: ANY
+      - http:
+          path: /math
+          method: ANY

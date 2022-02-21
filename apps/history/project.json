@@ -1,0 +1,75 @@
+{
+  "root": "apps/history",
+  "sourceRoot": "apps/history/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/history",
+        "main": "apps/history/src/lambda.ts",
+        "tsConfig": "apps/history/tsconfig.app.json",
+        "assets": ["apps/history/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/history/src/environments/environment.ts",
+              "with": "apps/history/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "build-local": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/history",
+        "main": "apps/history/src/main.ts",
+        "tsConfig": "apps/history/tsconfig.app.json",
+        "assets": ["apps/history/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/history/src/environments/environment.ts",
+              "with": "apps/history/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "history:build-local"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/history/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/history"],
+      "options": {
+        "jestConfig": "apps/history/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

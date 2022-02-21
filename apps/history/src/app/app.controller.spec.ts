@@ -14,10 +14,10 @@ describe('AppController', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to microservices-poc-nx!"', () => {
+    it('should return "Welcome to history!"', () => {
       const appController = app.get<AppController>(AppController);
       expect(appController.getData()).toEqual({
-        message: 'Welcome to microservices-poc-nx!',
+        message: 'Welcome to history!',
       });
     });
   });

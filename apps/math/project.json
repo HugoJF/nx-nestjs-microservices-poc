@@ -1,0 +1,75 @@
+{
+  "root": "apps/math",
+  "sourceRoot": "apps/math/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/math",
+        "main": "apps/math/src/lambda.ts",
+        "tsConfig": "apps/math/tsconfig.app.json",
+        "assets": ["apps/math/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/math/src/environments/environment.ts",
+              "with": "apps/math/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "build-local": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/math",
+        "main": "apps/math/src/main.ts",
+        "tsConfig": "apps/math/tsconfig.app.json",
+        "assets": ["apps/math/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/math/src/environments/environment.ts",
+              "with": "apps/math/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "math:build-local"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/math/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/math"],
+      "options": {
+        "jestConfig": "apps/math/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
