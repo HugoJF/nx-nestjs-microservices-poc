@@ -1,0 +1,52 @@
+{
+  "root": "apps/microservices-poc-nx",
+  "sourceRoot": "apps/microservices-poc-nx/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/microservices-poc-nx",
+        "main": "apps/microservices-poc-nx/src/main.ts",
+        "tsConfig": "apps/microservices-poc-nx/tsconfig.app.json",
+        "assets": ["apps/microservices-poc-nx/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/microservices-poc-nx/src/environments/environment.ts",
+              "with": "apps/microservices-poc-nx/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:execute",
+      "options": {
+        "buildTarget": "microservices-poc-nx:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/microservices-poc-nx/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/microservices-poc-nx"],
+      "options": {
+        "jestConfig": "apps/microservices-poc-nx/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

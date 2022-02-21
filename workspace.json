@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "projects": {
+    "microservices-poc-nx": "apps/microservices-poc-nx"
+  }
+}
