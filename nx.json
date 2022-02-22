@@ -1,5 +1,5 @@
 {
-  "npmScope": "microservices-poc-nx",
+  "npmScope": "nx-nestjs-microservices-poc",
   "affected": {
     "defaultBase": "main"
   },
@@ -29,5 +29,5 @@
       }
     ]
   },
-  "defaultProject": "microservices-poc-nx"
+  "defaultProject": "math"
 }
