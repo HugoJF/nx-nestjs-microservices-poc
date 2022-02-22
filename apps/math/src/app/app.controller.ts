@@ -1,25 +1,23 @@
 import {Controller, Get, Param} from '@nestjs/common';
 import {HttpService} from '@nestjs/axios';
-import {firstValueFrom, map} from "rxjs";
+import {firstValueFrom} from "rxjs";
+import {HistoryService} from "@nx-nestjs-microservices-poc/services";
 
 @Controller()
 export class AppController {
-  constructor(private readonly http: HttpService) {
+  constructor(
+    private readonly http: HttpService,
+    private readonly internalService: HistoryService,
+  ) {
   }
 
   @Get('sum/:a/:b')
   async sum(@Param('a') a: string, @Param('b') b: string) {
     const result = parseInt(a) + parseInt(b);
 
-    await firstValueFrom(
-      this.http.post(`https://nx-nestjs-microservices-poc.sa-east-1.aws.hugo.dev.br/history/${a}/${b}/${result}`),
-    );
+    await firstValueFrom(this.internalService.post(a, b, result));
 
-    const history = await firstValueFrom(
-      this.http
-        .get(`https://nx-nestjs-microservices-poc.sa-east-1.aws.hugo.dev.br/history`)
-        .pipe(map(({data}) => data)),
-    );
+    const history = await firstValueFrom(this.internalService.get());
 
     return {result, history};
   }

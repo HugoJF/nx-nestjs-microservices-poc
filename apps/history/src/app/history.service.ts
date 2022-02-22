@@ -3,7 +3,7 @@ import {Injectable} from '@nestjs/common';
 type History = { a: string; b: string; result: string };
 
 @Injectable()
-export class AppService {
+export class HistoryService {
   private readonly history: History[] = [{
     a: '2',
     b: '4',

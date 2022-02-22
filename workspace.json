@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "history": "apps/history",
-    "math": "apps/math"
+    "math": "apps/math",
+    "services": "libs/services"
   }
 }

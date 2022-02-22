@@ -1,10 +1,10 @@
 import {Controller, Get, HttpCode, Param, Post} from '@nestjs/common';
 
-import {AppService} from './app.service';
+import {HistoryService} from './history.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {
+  constructor(private readonly appService: HistoryService) {
   }
 
   @Post('/:a/:b/:result')
